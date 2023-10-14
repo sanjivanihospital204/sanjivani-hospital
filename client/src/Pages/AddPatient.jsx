@@ -36,7 +36,7 @@ const AddPatient = () => {
         showAlert: true
       });
     }
-    navigate("/dashboard");
+    navigate("/");
 
   };
 

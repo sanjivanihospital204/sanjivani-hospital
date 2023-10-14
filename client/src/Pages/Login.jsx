@@ -1,10 +1,10 @@
 import CryptoJS from 'crypto-js';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { logo } from "../Assets/index";
 import Alert from "../Components/Alert";
-import { ADMIN_LOGIN, ADMIN_LOGIN_API, LOCAL_OBJECT_SECRET_KEY } from "../Services/api";
-import { setLocalStorageObject } from "../Services/util";
+import { ADMIN_LOGIN, ADMIN_LOGIN_API, LOCAL_OBJECT_SECRET_KEY, POST_API, VERIFY_TOKEN } from "../Services/api";
+import { getLocalStorageObject, setLocalStorageObject } from "../Services/util";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -17,6 +17,24 @@ const Login = () => {
 
   const clearSuccess = () => setAlertBox('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = getLocalStorageObject('token');
+    const loggedInUser =
+      user && CryptoJS.AES.decrypt(user, LOCAL_OBJECT_SECRET_KEY).toString(CryptoJS.enc.Utf8);
+    const userData = JSON.parse(loggedInUser);
+
+    async function verifyTokenIsValid(token) {
+      const verifyTokenData = await POST_API(VERIFY_TOKEN, { token: token });
+      if (verifyTokenData?.valid) {
+        navigate('/');
+      }
+    }
+
+    if (userData?.token) {
+      verifyTokenIsValid(userData?.token);
+    }
+  }, [navigate]);
 
   const loginUser = async (event) => {
     event.preventDefault();
@@ -36,7 +54,7 @@ const Login = () => {
         LOCAL_OBJECT_SECRET_KEY
       ).toString();
       setLocalStorageObject('token', userData);
-      navigate("/dashboard");
+      navigate("/");
     } else {
       setAlertBox({
         message: adminResponse.message,
