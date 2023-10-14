@@ -1,3 +1,36 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* Custom style for the alert dialog */
+.alert {
+    background-color: #f6e05e;
+    border: 1px solid #ecc94b;
+    border-radius: 0.25rem;
+    color: #4a4a4a;
+    font-weight: bold;
+}
+
+/* Style for the alert dialog button (OK button) */
+.alert button {
+    background-color: #4299e1;
+    color: #fff;
+    border: none;
+    border-radius: 0.25rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+/* Style for the alert dialog overlay (if used) */
+.alert-overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

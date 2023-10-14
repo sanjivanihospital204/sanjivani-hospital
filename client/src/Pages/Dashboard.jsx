@@ -1,16 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import MenuToggle from "../Components/MenuToggle";
 import Menubar from "../Components/Menubar";
 import Navbar from "../Components/Navbar";
-import AddRecordForm from "../Components/AddRecordForm";
 import RecordTable from "../Components/RecordTable";
-import { useNavigate } from "react-router-dom";
+import { GET_ALL_PATIENT, GET_API } from "../Services/api";
 
 const Dashboard = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [records, setRecords] = useState([]);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    async function fetchData() {
+      const patientData = await GET_API(GET_ALL_PATIENT);
+      if (patientData?.status === 'OK') {
+        setRecords(patientData?.data);
+      }
+    }
+    fetchData();
+  }, [])
 
   const handleMenuToggle = () => {
     setShowMenu(!showMenu);

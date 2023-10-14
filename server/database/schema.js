@@ -8,8 +8,19 @@ const patient_schema = new mongoose.Schema({
   contactNumber: String,
 });
 
+const admin_schema = new mongoose.Schema({
+  email: String,
+  name: String,
+  password: String
+},
+  {
+    versionKey: false,
+  });
+
 const patientSchema = mongoose.model('patient', patient_schema);
+const adminSchema = mongoose.model('admin', admin_schema);
 
 module.exports = {
   patientSchema: patientSchema,
+  adminSchema: adminSchema,
 };

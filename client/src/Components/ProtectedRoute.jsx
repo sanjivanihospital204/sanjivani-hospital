@@ -6,13 +6,11 @@ const ProtectedRoute = () => {
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
-
     useEffect(() => {
         const token = localStorage.getItem('token');
 
         if (token) {
             setUserLoggedIn(true);
-            // navigate("/dashboard");
         } else {
             setUserLoggedIn(false);
         }

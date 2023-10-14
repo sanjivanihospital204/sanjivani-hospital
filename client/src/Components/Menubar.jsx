@@ -5,6 +5,7 @@ import {
   logout,
   user
 } from "../Assets/index";
+import { removeLocalStorageObject } from "../Services/util";
 
 const Menubar = () => {
   const [selectedItem, setSelectedItem] = useState(null);
@@ -46,6 +47,7 @@ const Menubar = () => {
           className="flex items-center justify-center h-20 cursor-pointer text-red-500"
           onClick={() => {
             window.location.href = "/";
+            removeLocalStorageObject('token');
           }}>
           <img src={logout} alt="Logout" className="h-6 w-6 mr-2" />
           <span className="hidden sm:inline-block text-red-500 text-2xl ">
