@@ -29,6 +29,10 @@ const ProtectedRoute = () => {
                 setUserLoggedIn(true);
                 navigate('/');
                 setLoading(false);
+            } else {
+                setUserLoggedIn(false);
+                navigate('/login');
+                setLoading(false);
             }
         }
 
