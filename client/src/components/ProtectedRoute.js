@@ -1,13 +1,26 @@
+import CircularProgress from '@mui/material/CircularProgress';
+import CryptoJS from 'crypto-js';
 import React, { useEffect, useState } from 'react';
 import { Navigate, Outlet, useNavigate } from 'react-router-dom';
-import { getLocalStorageObject } from '../Services/util';
-import CryptoJS from 'crypto-js';
 import { LOCAL_OBJECT_SECRET_KEY, POST_API, VERIFY_TOKEN } from '../Services/api';
+import { getLocalStorageObject } from '../Services/util';
+
 
 const Loader = () => {
     return (
-        <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-white opacity-75 z-50">
-            <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-blue-500 border-r-2 border-b-2 border-blue-700"></div>
+        <div style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100vw',
+            height: '100vh',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: 'rgba(255, 255, 255, 0.75)',
+            zIndex: 50,
+        }}>
+            <CircularProgress size={32} color="primary" />
         </div>
     );
 };
@@ -16,13 +29,12 @@ const ProtectedRoute = () => {
     const [userLoggedIn, setUserLoggedIn] = useState(false);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    const user = getLocalStorageObject('sanjivaniAuthToken');
+    const loggedInUser =
+        user && CryptoJS.AES.decrypt(user, LOCAL_OBJECT_SECRET_KEY).toString(CryptoJS.enc.Utf8);
+    const userData = JSON.parse(loggedInUser);
 
     useEffect(() => {
-        const user = getLocalStorageObject('token');
-        const loggedInUser =
-            user && CryptoJS.AES.decrypt(user, LOCAL_OBJECT_SECRET_KEY).toString(CryptoJS.enc.Utf8);
-        const userData = JSON.parse(loggedInUser);
-
         async function verifyTokenIsValid(token) {
             const verifyTokenData = await POST_API(VERIFY_TOKEN, { token: token });
             if (verifyTokenData?.valid) {

@@ -1,21 +1,58 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import ProtectedRoute from "./Components/ProtectedRoute";
-import AddPatient from "./Pages/AddPatient";
-import Dashboard from "./Pages/Dashboard";
-import Login from "./Pages/Login";
+import { createContext, useState } from "react";
+// import { Redirect, Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
+
+// elements
+import Alert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
+import ProtectedRoute from "./components/ProtectedRoute";
+import ErrorPage from "./pages/404";
+import AddPatient from "./pages/AddPatient";
+import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
+import Patient from "./pages/Patient";
+
+export const MessageBarContext = createContext();
+
 
 const App = () => {
+  const [messageBar, setMessageBar] = useState({
+    open: false,
+    vertical: "top",
+    horizontal: "center",
+    severity: "success", // Add severity property
+    message: "", // Add message property
+  });
+
+  const handleSnackbarClose = () => {
+    setMessageBar({ ...messageBar, open: false });
+  };
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<ProtectedRoute />}>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/add-patient" element={<AddPatient />} />
-        </Route>
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <MessageBarContext.Provider value={{ messageBar, setMessageBar }}>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<ProtectedRoute />}>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/patients" element={<Patient />} />
+            <Route path="/add-patient" element={<AddPatient />} />
+            <Route path="*" element={<ErrorPage />} />
+          </Route>
+        </Routes>
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+          open={messageBar.open}
+          autoHideDuration={3000}
+          onClose={handleSnackbarClose}
+        >
+          <Alert onClose={handleSnackbarClose} severity={messageBar.severity} sx={{ width: '100%' }}>
+            {messageBar.message}
+          </Alert>
+        </Snackbar>
+      </MessageBarContext.Provider>
+    </>
   );
 };
 

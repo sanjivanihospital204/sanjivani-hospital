@@ -26,7 +26,7 @@ export const ADMIN_LOGIN = async (api, data) => {
 export const POST_API = async (api, data) => {
 
   //get logged in token from local_storage
-  const user = getLocalStorageObject('token');
+  const user = getLocalStorageObject('sanjivaniAuthToken');
   const loggedInUser =
     user && CryptoJS.AES.decrypt(user, LOCAL_OBJECT_SECRET_KEY).toString(CryptoJS.enc.Utf8);
   const userData = JSON.parse(loggedInUser);
@@ -47,7 +47,7 @@ export const POST_API = async (api, data) => {
 
 export const GET_API = async (api) => {
   //get logged in token from local_storage
-  const user = getLocalStorageObject('token');
+  const user = getLocalStorageObject('sanjivaniAuthToken');
   const loggedInUser =
     user && CryptoJS.AES.decrypt(user, LOCAL_OBJECT_SECRET_KEY).toString(CryptoJS.enc.Utf8);
   const userData = JSON.parse(loggedInUser);
