@@ -121,7 +121,6 @@ const FormLogin = () => {
 
   // form submit
   const onSubmit = async (data) => {
-    console.table(data);
     const { email, password } = data;
     const adminResponse = await ADMIN_LOGIN(ADMIN_LOGIN_API, {
       email,

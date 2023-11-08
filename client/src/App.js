@@ -37,7 +37,7 @@ const App = () => {
           <Route path="/" element={<ProtectedRoute />}>
             <Route path="/" element={<Dashboard />} />
             <Route path="/patients" element={<Patient />} />
-            <Route path="/add-patient" element={<AddPatient />} />
+            <Route path="/patient/:patientId?" element={<AddPatient />} />
             <Route path="*" element={<ErrorPage />} />
           </Route>
         </Routes>

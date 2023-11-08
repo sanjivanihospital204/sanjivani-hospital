@@ -39,7 +39,7 @@ const ProtectedRoute = () => {
             const verifyTokenData = await POST_API(VERIFY_TOKEN, { token: token });
             if (verifyTokenData?.valid) {
                 setUserLoggedIn(true);
-                navigate('/');
+                // navigate('/');
                 setLoading(false);
             } else {
                 setUserLoggedIn(false);

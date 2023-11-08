@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-console.log("process.env.", process.env.USER_NAME);
 const DB_URI = `mongodb+srv://${process.env.USER_NAME}:${process.env.USER_PASSWORD}@cluster0.qqswskm.mongodb.net/${process.env.MONGO_COLLECTION_NAME}?retryWrites=true&w=majority`;
 
 mongoose

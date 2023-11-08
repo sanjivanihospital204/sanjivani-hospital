@@ -9,3 +9,9 @@ export function setLocalStorageObject(key, value) {
   export function removeLocalStorageObject(key) {
     return localStorage.removeItem(key);
   }
+
+  export function getDateFormate(date) {
+    const dateObject = new Date(date);
+    const formattedDate = dateObject.toISOString().split('T')[0];
+    return formattedDate;
+  }

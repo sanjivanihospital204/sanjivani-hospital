@@ -6,4 +6,8 @@ router.get("/all", patientController.getAllPatients);
 
 router.post("/create", patientController.createNewPatient);
 
+router.get("/:patientId", patientController.getPatientById);
+
+router.post("/update", patientController.updatePatientById);
+
 module.exports = router;

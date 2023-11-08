@@ -17,6 +17,7 @@ const MainStyle = styled("main")(({ theme }) => ({
   flexGrow: 1,
   minHeight: "100vh",
   padding: theme.spacing(2.5),
+  width: "100%",
 }));
 
 const DashboardLayout = (props) => {

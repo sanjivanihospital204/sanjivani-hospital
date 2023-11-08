@@ -3,11 +3,13 @@ import EditIcon from '@mui/icons-material/Edit';
 import { IconButton } from "@mui/material";
 import { DataGrid } from '@mui/x-data-grid';
 import React, { useEffect } from "react";
+import { useNavigate } from 'react-router';
+import { getDateFormate } from '../../Services/util';
 
 const UserTable = ({ records }) => {
 
-  console.log("records", records);
   const [tableData, setTableData] = React.useState({});
+  const navigate = useNavigate();
 
 
   useEffect(() => {
@@ -16,8 +18,9 @@ const UserTable = ({ records }) => {
       Object.keys(records).length > 0 &&
       records.map((item, index) => {
         return {
-          id: index + 1,
           ...item,
+          id: index + 1,
+          date: getDateFormate(item.date),
         };
       });
     setTableData(t_data);
@@ -40,7 +43,8 @@ const UserTable = ({ records }) => {
     const handleEditClick = () => {
       // Handle the edit button click event
       const selectedFormData = params.row;
-      console.log("selectedFormData", selectedFormData);
+      const { _id } = selectedFormData;
+      navigate(`/patient/${_id}`);
     };
 
     return (
@@ -52,14 +56,6 @@ const UserTable = ({ records }) => {
 
   function renderDeleteCell(params) {
     const handleDeleteClick = () => {
-      // Handle the edit button click event
-      // const selectedFormData = params.row;
-      // const encrypted = CryptoJS.AES.encrypt(
-      //   JSON.stringify(selectedFormData),
-      //   constant.SESSION_OBJECT_SECRET_KEY
-      // ).toString();
-      // setSessionStorageObject(constant.PROPERTY_SESSION_KEY, encrypted);
-      // navigate(`/user/add-property`);
     };
 
     return (

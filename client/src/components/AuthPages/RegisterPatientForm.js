@@ -2,11 +2,12 @@ import { Button, InputAdornment } from "@material-ui/core";
 import { styled } from "@material-ui/styles";
 import { TextField } from "@mui/material";
 import { Box } from "@mui/system";
+import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { CREATE_PATIENT, POST_API } from "../../Services/api";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
 import { MessageBarContext } from "../../App";
+import { CREATE_PATIENT, POST_API, UPDATE_PATIENT } from "../../Services/api";
+import { getDateFormate } from "../../Services/util";
 
 // style
 const FormStyle = styled("form")(({ theme }) => ({
@@ -53,8 +54,9 @@ const FormStyle = styled("form")(({ theme }) => ({
   },
 }));
 
-const RegisterPatientForm = () => {
+const RegisterPatientForm = ({ data, editPatient, pId }) => {
   const { messageBar, setMessageBar } = useContext(MessageBarContext);
+
 
   const navigate = useNavigate();
 
@@ -63,6 +65,7 @@ const RegisterPatientForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm({
     defaultValues: {
       name: "",
@@ -73,41 +76,54 @@ const RegisterPatientForm = () => {
     },
   });
 
+  useEffect(() => {
+    if (Object.keys(data).length > 0) {
+      setValue("name", data.name);
+      setValue("date", getDateFormate(data.date));
+      setValue("address", data.address);
+      setValue("contactNumber", data.contactNumber);
+      setValue("weight", data.weight);
+    }
+  }, [data])
+
+
   // submit
   const onSubmit = async (data) => {
-    console.table(data);
-    const createPatientResponse = await POST_API(CREATE_PATIENT, data);
-    if (createPatientResponse?.status === "created") {
+
+    const patientResponse = await POST_API(editPatient ? UPDATE_PATIENT : CREATE_PATIENT, editPatient ? {
+      ...data,
+      _id: pId,
+    } : data);
+    if (patientResponse?.status === "done") {
       setMessageBar({
         open: true,
         severity: "success",
-        message: createPatientResponse.message,
+        message: patientResponse.message,
       });
     } else {
       setMessageBar({
         open: true,
         severity: "error",
-        message: createPatientResponse.message,
+        message: patientResponse.message,
       });
     }
+
     navigate("/patients");
   };
 
   return (
     <FormStyle component="form" onSubmit={handleSubmit(onSubmit)}>
-      {/* Names box */}
-      <Box display="flex" flexDirection="column" alignItems="flex-start">
-        <label>Date Of Entry</label>
-        <TextField
-          variant="outlined"
-          fullWidth
-          type="date"
-          {...register("date", { required: true })}
-          error={errors.date ? true : false}
-          helperText={errors.date && "Enter a valid date"}
-          style={{ width: "100%" }}
-        />
-      </Box>
+      <TextField
+        variant="outlined"
+        fullWidth
+        type="date"
+        label="Date Of Entry"
+        {...register("date", { required: true })}
+        error={errors.date ? true : false}
+        helperText={errors.date && "Enter a valid date"}
+        style={{ width: "100%" }}
+        InputLabelProps={{ shrink: true }}
+      />
       <Box
         sx={{
           display: "grid",
@@ -123,6 +139,7 @@ const RegisterPatientForm = () => {
           {...register("name", { required: true })}
           error={errors.name ? true : false}
           helperText={errors.name && "Enter a valid Patient Name"}
+          InputLabelProps={{ shrink: true }}
         />
 
         <TextField
@@ -133,6 +150,7 @@ const RegisterPatientForm = () => {
           {...register("weight", { required: true })}
           error={errors.weight ? true : false}
           helperText={errors.weight && "Enter a valid weight"}
+          InputLabelProps={{ shrink: true }}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">kg</InputAdornment>
@@ -148,6 +166,7 @@ const RegisterPatientForm = () => {
           {...register("contactNumber", { required: true })}
           error={errors.contactNumber ? true : false}
           helperText={errors.contactNumber && "Enter a valid Contact Number"}
+          InputLabelProps={{ shrink: true }}
         />
       </Box>
 
@@ -161,11 +180,11 @@ const RegisterPatientForm = () => {
         {...register("address", { required: true })}
         error={errors.address ? true : false}
         helperText={errors.address && "Enter a valid address"}
+        InputLabelProps={{ shrink: true }}
       />
 
-      {/* submit */}
       <Button type="submit" variant="contained" disableElevation>
-        SUBMIT
+        {editPatient ? "UPDATE" : "SUBMIT"}
       </Button>
     </FormStyle>
   );

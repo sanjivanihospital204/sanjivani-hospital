@@ -22,7 +22,7 @@ const createNewPatient = async (data) => {
     if (savedUser) {
       return {
         message: 'Patient Created successfully',
-        status: 'created'
+        status: 'done'
       };
     } else {
       return { message: 'Something went wrong', status: 'unDone' };
@@ -32,8 +32,40 @@ const createNewPatient = async (data) => {
   }
 };
 
+const getPatientById = async (patientId) => {
+  return await schema.patientSchema
+    .findOne({ _id: patientId }, function (err, result) {
+      if (err) {
+        throw err;
+      } else {
+        return result;
+      }
+    })
+    .clone()
+    .catch(function (err) {
+      return err;
+    });
+};
+
+const updatePatientById = async (data) => {
+  return await schema.patientSchema
+    .updateOne({ _id: data._id }, { $set: data })
+    .then((result) => {
+      if (result) {
+        return {
+          message: 'Patient Updated successfully',
+          status: 'done'
+        };
+      } else {
+        return { message: 'Something went wrong', status: 'unDone' };
+      }
+    })
+    .catch((err) => console.warn(err));
+};
 
 module.exports = {
   createNewPatient,
-  getAllPatients
+  getAllPatients,
+  getPatientById,
+  updatePatientById
 };

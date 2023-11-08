@@ -16,7 +16,30 @@ const createNewPatient = async (req, res) => {
   }
 };
 
+const getPatientById = async (req, res) => {
+  const {
+    params: { patientId },
+  } = req;
+  if (!patientId) {
+    res.send({ message: "id is not valid" });
+  }
+  const patient = await patientService.getPatientById(patientId);
+  res.send({ status: "OK", data: patient });
+};
+
+const updatePatientById = async (req, res) => {
+  try {
+    const { body } = req;
+    const updatedPatient = await patientService.updatePatientById(body);
+    res.status(201).json(updatedPatient);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   createNewPatient,
-  getAllPatients
+  getAllPatients,
+  getPatientById,
+  updatePatientById
 };

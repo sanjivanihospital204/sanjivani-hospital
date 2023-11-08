@@ -37,7 +37,7 @@ const UserHeader = () => {
       <Typography variant="h3">Sanjivni - Patients</Typography>
 
     
-      <Button variant="contained" disableElevation startIcon={<BiPlus />} onClick={() => navigate("/add-patient")}>
+      <Button variant="contained" disableElevation startIcon={<BiPlus />} onClick={() => navigate("/patient")}>
         New Patient
       </Button>
     </BoxStyle>
