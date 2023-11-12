@@ -28,13 +28,15 @@ const UserTable = ({ records }) => {
 
   const columns = [
     { field: 'id', headerName: 'No.', width: 70 },
-    { field: 'name', headerName: 'Name', width: 200 },
-    { field: 'date', headerName: 'Date', width: 200 },
+    { field: 'name', headerName: 'Name', width: 150 },
+    { field: 'age', headerName: 'Age', width: 80 },
+    { field: 'gender', headerName: 'Gender', width: 100 },
     {
       field: 'address',
       headerName: 'Address',
-      width: 200,
+      width: 180,
     },
+    { field: 'date', headerName: 'Date', width: 100 },
     { field: 'edit', headerName: 'Edit', width: 70, renderCell: renderEditCell },
     { field: 'delete', headerName: 'Delete', width: 70, renderCell: renderDeleteCell },
   ];

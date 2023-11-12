@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const patient_schema = new mongoose.Schema({
   name: String,
@@ -6,19 +6,23 @@ const patient_schema = new mongoose.Schema({
   address: String,
   weight: String,
   contactNumber: String,
+  gender: String,
+  age: String,
 });
 
-const admin_schema = new mongoose.Schema({
-  email: String,
-  name: String,
-  password: String
-},
+const admin_schema = new mongoose.Schema(
+  {
+    email: String,
+    name: String,
+    password: String,
+  },
   {
     versionKey: false,
-  });
+  }
+);
 
-const patientSchema = mongoose.model('patient', patient_schema);
-const adminSchema = mongoose.model('admin', admin_schema);
+const patientSchema = mongoose.model("patient", patient_schema);
+const adminSchema = mongoose.model("admin", admin_schema);
 
 module.exports = {
   patientSchema: patientSchema,

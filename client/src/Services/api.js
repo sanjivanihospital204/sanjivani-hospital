@@ -1,8 +1,8 @@
 import { getLocalStorageObject } from "./util";
 import CryptoJS from 'crypto-js';
 
-// export const VERCEL_API_HOSTNAME = 'http://localhost:3007';
-export const VERCEL_API_HOSTNAME = 'https://sanjivani-hospital.vercel.app';
+export const VERCEL_API_HOSTNAME = 'http://localhost:3007';
+// export const VERCEL_API_HOSTNAME = 'https://sanjivani-hospital.vercel.app';
 export const LOCAL_OBJECT_SECRET_KEY = 'sanjivani-hospital-secrets';
 export const ADMIN_LOGIN_API = '/admin/login';
 export const GET_ALL_PATIENT = '/patient/all';

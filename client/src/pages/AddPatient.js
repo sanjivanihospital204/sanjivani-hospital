@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useParams } from "react-router";
 import { GET_API, GET_PATIENT_BY_ID } from "../Services/api";
-import RegisterPatientForm from "../components/AuthPages/RegisterPatientForm";
+import RegisterPatientForm from "../components/Form/RegisterPatientForm";
 import DashboardLayout from "../layout/DashboardLayout";
 
 const AddPatient = () => {

@@ -2,8 +2,8 @@ import { Container, Typography } from "@material-ui/core";
 import { styled } from "@material-ui/styles";
 import { Box } from "@mui/system";
 import { Helmet } from "react-helmet";
-import FormLogin from "../components/AuthPages/FormLogin";
-import LeftPanel from "../components/AuthPages/LeftPanel";
+import FormLogin from "../components/Form/FormLogin";
+import LeftPanel from "../components/Form/LeftPanel";
 
 // img
 import LoginPhoto from "../images/auth/login.png";

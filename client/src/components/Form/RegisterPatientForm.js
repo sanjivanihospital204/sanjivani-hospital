@@ -1,9 +1,16 @@
 import { Button, InputAdornment } from "@material-ui/core";
 import { styled } from "@material-ui/styles";
-import { TextField } from "@mui/material";
+import {
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup,
+  TextField,
+} from "@mui/material";
 import { Box } from "@mui/system";
 import { useContext, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { MessageBarContext } from "../../App";
 import { CREATE_PATIENT, POST_API, UPDATE_PATIENT } from "../../Services/api";
@@ -57,7 +64,6 @@ const FormStyle = styled("form")(({ theme }) => ({
 const RegisterPatientForm = ({ data, editPatient, pId }) => {
   const { messageBar, setMessageBar } = useContext(MessageBarContext);
 
-
   const navigate = useNavigate();
 
   // hook form
@@ -66,13 +72,16 @@ const RegisterPatientForm = ({ data, editPatient, pId }) => {
     handleSubmit,
     formState: { errors },
     setValue,
+    control,
   } = useForm({
     defaultValues: {
       name: "",
       date: "",
       address: "",
       contactNumber: "",
-      weight: ""
+      weight: "",
+      gender: "",
+      age: "",
     },
   });
 
@@ -83,17 +92,22 @@ const RegisterPatientForm = ({ data, editPatient, pId }) => {
       setValue("address", data.address);
       setValue("contactNumber", data.contactNumber);
       setValue("weight", data.weight);
+      setValue("age", data.age);
+      setValue("gender", data.gender);
     }
-  }, [data])
-
+  }, [data]);
 
   // submit
   const onSubmit = async (data) => {
-
-    const patientResponse = await POST_API(editPatient ? UPDATE_PATIENT : CREATE_PATIENT, editPatient ? {
-      ...data,
-      _id: pId,
-    } : data);
+    const patientResponse = await POST_API(
+      editPatient ? UPDATE_PATIENT : CREATE_PATIENT,
+      editPatient
+        ? {
+            ...data,
+            _id: pId,
+          }
+        : data
+    );
     if (patientResponse?.status === "done") {
       setMessageBar({
         open: true,
@@ -147,14 +161,18 @@ const RegisterPatientForm = ({ data, editPatient, pId }) => {
           fullWidth
           type="number"
           label="Patient weight"
-          {...register("weight", { required: true })}
+          {...register("weight", {
+            required: true,
+            pattern: {
+              value: /^\d{0,3}$/,
+              message: "Enter a valid weight with exactly 3 digits",
+            },
+          })}
           error={errors.weight ? true : false}
           helperText={errors.weight && "Enter a valid weight"}
           InputLabelProps={{ shrink: true }}
           InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">kg</InputAdornment>
-            ),
+            endAdornment: <InputAdornment position="end">kg</InputAdornment>,
           }}
         />
 
@@ -162,13 +180,62 @@ const RegisterPatientForm = ({ data, editPatient, pId }) => {
           variant="outlined"
           fullWidth
           type="number"
+          label="Patient Age"
+          {...register("age", {
+            required: true,
+            pattern: {
+              value: /^\d{0,3}$/,
+              message: "Enter a valid weight with exactly 3 digits",
+            },
+          })}
+          error={errors.age ? true : false}
+          helperText={errors.age && "Enter a valid Patient Age"}
+          InputLabelProps={{ shrink: true }}
+        />
+
+        <TextField
+          variant="outlined"
+          fullWidth
+          type="number"
           label="Contact Number"
-          {...register("contactNumber", { required: true })}
+          {...register("contactNumber", {
+            required: true,
+            pattern: {
+              value: /^\d{10}$/,
+              message: "Enter a valid weight with exactly 3 digits",
+            },
+          })}
           error={errors.contactNumber ? true : false}
           helperText={errors.contactNumber && "Enter a valid Contact Number"}
           InputLabelProps={{ shrink: true }}
         />
       </Box>
+
+      <FormControl component="fieldset" margin="normal">
+        <FormLabel component="legend">Gender</FormLabel>
+        <Controller
+          name="gender"
+          control={control}
+          defaultValue=""
+          rules={{ required: true }}
+          render={({ field }) => (
+            <RadioGroup {...field} row>
+              <FormControlLabel value="male" control={<Radio />} label="Male" />
+              <FormControlLabel
+                value="female"
+                control={<Radio />}
+                label="Female"
+              />
+              {/* <FormControlLabel
+                  value="other"
+                  control={<Radio />}
+                  label="Other"
+                /> */}
+            </RadioGroup>
+          )}
+        />
+        {errors.gender && <span>Choose a gender</span>}
+      </FormControl>
 
       <TextField
         variant="outlined"
