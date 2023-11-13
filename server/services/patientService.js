@@ -1,18 +1,13 @@
-const schema = require('../database/schema');
+const schema = require("../database/schema");
 
 const getAllPatients = async () => {
-  return await schema.patientSchema
-    .find({}, function (err, result) {
-      if (err) {
-        throw err;
-      } else {
-        return result;
-      }
-    })
-    .clone()
-    .catch(function (err) {
-      return err;
-    });
+  try {
+    const result = await schema.patientSchema.find({}).sort({ _id: -1 }).exec();
+
+    return result;
+  } catch (err) {
+    throw err;
+  }
 };
 
 const createNewPatient = async (data) => {
@@ -21,14 +16,14 @@ const createNewPatient = async (data) => {
     const savedUser = await user.save();
     if (savedUser) {
       return {
-        message: 'Patient Created successfully',
-        status: 'done'
+        message: "Patient Created successfully",
+        status: "done",
       };
     } else {
-      return { message: 'Something went wrong', status: 'unDone' };
+      return { message: "Something went wrong", status: "unDone" };
     }
   } catch (error) {
-    throw new Error('Failed to create a user: ' + error.message);
+    throw new Error("Failed to create a user: " + error.message);
   }
 };
 
@@ -53,11 +48,11 @@ const updatePatientById = async (data) => {
     .then((result) => {
       if (result) {
         return {
-          message: 'Patient Updated successfully',
-          status: 'done'
+          message: "Patient Updated successfully",
+          status: "done",
         };
       } else {
-        return { message: 'Something went wrong', status: 'unDone' };
+        return { message: "Something went wrong", status: "unDone" };
       }
     })
     .catch((err) => console.warn(err));
@@ -67,5 +62,5 @@ module.exports = {
   createNewPatient,
   getAllPatients,
   getPatientById,
-  updatePatientById
+  updatePatientById,
 };
