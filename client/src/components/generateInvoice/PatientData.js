@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
     position: "relative",
     textAlign: "center",
     alignItems: "center",
+    top: '7%'
   },
   logo: {
     width: "50%",

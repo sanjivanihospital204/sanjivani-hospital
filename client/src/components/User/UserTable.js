@@ -87,19 +87,33 @@ const UserTable = ({ records }) => {
   }
 
   function renderDownloadLetterPad(params) {
+    const selectedFormData = params.row;
+
     const handleDownloadLetterPadClick = () => {
       // Handle the edit button click event
-      const selectedFormData = params.row;
       setShowPdfViewer(true);
       setSelectedPatientData(selectedFormData);
-      console.log("row", params.row);
     };
-
-    return (
-      <IconButton onClick={handleDownloadLetterPadClick}>
-        <FilePresentIcon />
-      </IconButton>
-    );
+    if (isMobile) {
+      return (
+        <PDFDownloadLink
+          document={<PatientData patient={selectedFormData} />}
+          fileName={"letterpad.pdf"}
+        >
+          {({ blob, url, loading, error }) => (
+            <IconButton>
+              <FilePresentIcon />
+            </IconButton>
+          )}
+        </PDFDownloadLink>
+      );
+    } else {
+      return (
+        <IconButton onClick={handleDownloadLetterPadClick}>
+          <FilePresentIcon />
+        </IconButton>
+      );
+    }
   }
 
   function renderDeleteCell(params) {
@@ -126,6 +140,8 @@ const UserTable = ({ records }) => {
     const properties = getDataByIndex(tableData, selectedItems);
     // selectedProperties(properties);
   };
+
+  const isMobile = window.innerWidth <= 600;
 
   return (
     <>
@@ -176,12 +192,7 @@ const UserTable = ({ records }) => {
         </DialogTitle>
         <DialogContent>
           <PDFViewer width="100%" height="600px">
-            {/* <PdfDocument
-              invoicedata={InvoiceData}
-              patient={selectedPatientData}
-            /> */}
-                <PatientData patient={selectedPatientData} />
-
+            <PatientData patient={selectedPatientData} />
           </PDFViewer>
         </DialogContent>
       </Dialog>
