@@ -13,7 +13,7 @@ import CryptoJS from 'crypto-js';
 
 // icons & images
 import { LOCAL_OBJECT_SECRET_KEY } from "../../Services/api";
-import { getLocalStorageObject } from "../../Services/util";
+import { getLocalStorageObject, removeLocalStorageObject } from "../../Services/util";
 import userAvatar from "../../images/avatar_default.jpg";
 
 // styles
@@ -128,7 +128,7 @@ const UserMenu = (props) => {
         <Divider />
 
         <BoxStyle>
-          <LinkStyle href="/" underline="none">
+          <LinkStyle href="/login" underline="none" onClick={() => removeLocalStorageObject('sanjivaniAuthToken')}>
             Logout
           </LinkStyle>
         </BoxStyle>

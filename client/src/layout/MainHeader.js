@@ -62,9 +62,9 @@ const MainHeader = (props) => {
             <RiMenu3Line />
           </ToggleButtonStyle>
 
-          <IconButton aria-label="search">
+          {/* <IconButton aria-label="search">
             <BiSearch fontSize="small" />
-          </IconButton>
+          </IconButton> */}
         </ContainerStyle>
 
         {/* Right side's items */}

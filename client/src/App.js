@@ -12,6 +12,7 @@ import AddPatient from "./pages/AddPatient";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Patient from "./pages/Patient";
+import PdfDemo from "./PdfDemo";
 
 export const MessageBarContext = createContext();
 
@@ -38,6 +39,7 @@ const App = () => {
             <Route path="/" element={<Dashboard />} />
             <Route path="/patients" element={<Patient />} />
             <Route path="/patient/:patientId?" element={<AddPatient />} />
+            <Route path="/pdf" element={<PdfDemo />} />
             <Route path="*" element={<ErrorPage />} />
           </Route>
         </Routes>

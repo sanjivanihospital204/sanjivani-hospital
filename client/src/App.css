@@ -16,3 +16,11 @@
 ::-webkit-scrollbar-thumb:hover {
   background: purple;
 }
+
+.App {
+  text-align: center;
+}
+.download-link {
+  font-size: large;
+  font-weight: bold;
+}
