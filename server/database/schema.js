@@ -8,6 +8,8 @@ const patient_schema = new mongoose.Schema({
   contactNumber: String,
   gender: String,
   age: String,
+  referDoctor: String,
+  consultantDoctor: String
 });
 
 const admin_schema = new mongoose.Schema(

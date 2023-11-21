@@ -80,8 +80,17 @@ const styles = StyleSheet.create({
   w30: {
     width: "30%",
   },
+  w40: {
+    width: "40%",
+  },
   w20: {
     width: "20%",
+  },
+  w50: {
+    width: "50%",
+  },
+  w100: {
+    width: "100%",
   },
 });
 
@@ -102,15 +111,36 @@ const PatientData = ({ patient }) => (
             </View>
           </View>
           <View style={styles.rowContainer}>
-            <View style={[styles.w70, styles.rowContainer]}>
+            <View style={[styles.w100, styles.rowContainer]}>
               <Text style={styles.label}>સરનામું :</Text>
               <Text style={styles.value}>{patient?.address}</Text>
+            </View>
+          </View>
+          <View style={styles.rowContainer}>
+            <View style={[styles.w40, styles.rowContainer]}>
+              <Text style={styles.label}>જાતિ :</Text>
+              <Text style={styles.value}>{patient?.gender}</Text>
+            </View>
+            <View style={[styles.w30, styles.rowContainer]}>
+              <Text style={styles.label}>ઉંમર :</Text>
+              <Text style={styles.value}>{patient?.age}</Text>
             </View>
             <View style={[styles.w30, styles.rowContainer]}>
               <Text style={styles.label}>વજન :</Text>
               <Text style={styles.value}>{patient?.weight}</Text>
             </View>
           </View>
+          <View style={styles.rowContainer}>
+            <View style={[styles.w50, styles.rowContainer]}>
+              <Text style={styles.label}>ReferDr :</Text>
+              <Text style={styles.value}>{patient?.referDoctor}</Text>
+            </View>
+            <View style={[styles.w50, styles.rowContainer]}>
+              <Text style={styles.label}>ConsultantDr :</Text>
+              <Text style={styles.value}>{patient?.consultantDoctor}</Text>
+            </View>
+          </View>
+
         </View>
         <View style={styles.mainContent}>
           <Image style={styles.logo} src={logo} alt="Logo" />

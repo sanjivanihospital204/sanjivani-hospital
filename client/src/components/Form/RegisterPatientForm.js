@@ -82,6 +82,8 @@ const RegisterPatientForm = ({ data, editPatient, pId }) => {
       weight: "",
       gender: "",
       age: "",
+      referDoctor: "",
+      consultantDoctor: ""
     },
   });
 
@@ -94,6 +96,8 @@ const RegisterPatientForm = ({ data, editPatient, pId }) => {
       setValue("weight", data.weight);
       setValue("age", data.age);
       setValue("gender", data.gender);
+      setValue("referDoctor", data.referDoctor);
+      setValue("consultantDoctor", data.consultantDoctor);
     }
   }, [data]);
 
@@ -103,9 +107,9 @@ const RegisterPatientForm = ({ data, editPatient, pId }) => {
       editPatient ? UPDATE_PATIENT : CREATE_PATIENT,
       editPatient
         ? {
-            ...data,
-            _id: pId,
-          }
+          ...data,
+          _id: pId,
+        }
         : data
     );
     if (patientResponse?.status === "done") {
@@ -249,6 +253,36 @@ const RegisterPatientForm = ({ data, editPatient, pId }) => {
         helperText={errors.address && "Enter a valid address"}
         InputLabelProps={{ shrink: true }}
       />
+
+      <Box
+        sx={{
+          display: "grid",
+          gap: { xs: 3, sm: 2 },
+          gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" },
+        }}
+      >
+        <TextField
+          variant="outlined"
+          fullWidth
+          type="text"
+          label="Refer Doctor"
+          {...register("referDoctor", { required: true })}
+          error={errors.referDoctor ? true : false}
+          helperText={errors.referDoctor && "Refer Doctor"}
+          InputLabelProps={{ shrink: true }}
+        />
+
+        <TextField
+          variant="outlined"
+          fullWidth
+          type="text"
+          label="Consultant Doctor"
+          {...register("consultantDoctor", { required: true })}
+          error={errors.consultantDoctor ? true : false}
+          helperText={errors.consultantDoctor && "Consultant Doctor"}
+          InputLabelProps={{ shrink: true }}
+        />
+      </Box>
 
       <Button type="submit" variant="contained" disableElevation>
         {editPatient ? "UPDATE" : "SUBMIT"}
