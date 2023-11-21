@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   value: {
     marginLeft: 5,
     paddingLeft: 7,
-    width: "100%",
+    width: "85%",
     borderBottom: "1px dotted #000",
     fontSize: 12,
   },
@@ -88,6 +88,9 @@ const styles = StyleSheet.create({
   },
   w50: {
     width: "50%",
+  },
+  w60: {
+    width: "60%",
   },
   w100: {
     width: "100%",
@@ -131,11 +134,11 @@ const PatientData = ({ patient }) => (
             </View>
           </View>
           <View style={styles.rowContainer}>
-            <View style={[styles.w50, styles.rowContainer]}>
+            <View style={[styles.w40, styles.rowContainer]}>
               <Text style={styles.label}>ReferDr :</Text>
               <Text style={styles.value}>{patient?.referDoctor}</Text>
             </View>
-            <View style={[styles.w50, styles.rowContainer]}>
+            <View style={[styles.w60, styles.rowContainer]}>
               <Text style={styles.label}>ConsultantDr :</Text>
               <Text style={styles.value}>{patient?.consultantDoctor}</Text>
             </View>
