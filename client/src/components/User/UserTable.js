@@ -1,28 +1,35 @@
+import CloseIcon from "@mui/icons-material/Close";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { IconButton, InputAdornment, TextField } from "@mui/material";
+import FilePresentIcon from "@mui/icons-material/FilePresent";
+import SearchIcon from "@mui/icons-material/Search";
+import { Dialog, DialogContent, DialogTitle, IconButton, InputAdornment, TextField } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
+import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { getDateFormate } from "../../Services/util";
-import FilePresentIcon from "@mui/icons-material/FilePresent";
-import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
-import PdfDocument from "../generateInvoice/Invoice";
-import InvoiceData from "../../jsonData/InvoiceData";
-import { Button, Dialog, DialogContent, DialogTitle } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
-import SearchIcon from "@mui/icons-material/Search";
 import PatientData from "../generateInvoice/PatientData";
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
+import PDFDialog from "../PDFDialog";
 
 const UserTable = ({ records }) => {
   const [tableData, setTableData] = useState({});
   const [selectedPatientData, setSelectedPatientData] = useState({});
   const [showPdfViewer, setShowPdfViewer] = useState(false);
+  const [showBillPdfViewer, setShowBillPdfViewer] = useState(false);
   const [searchText, setSearchText] = useState("");
 
   const handlePdfViewerClose = () => {
     setShowPdfViewer(false);
   };
+
+
+  const handleBillPdfViewerClose = () => {
+    setShowBillPdfViewer(false);
+  };
+
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -68,6 +75,12 @@ const UserTable = ({ records }) => {
       width: 70,
       renderCell: renderDownloadLetterPad,
     },
+    {
+      field: "bill",
+      headerName: "Bill",
+      width: 70,
+      renderCell: renderBillCell,
+    },
     // { field: 'delete', headerName: 'Delete', width: 70, renderCell: renderDeleteCell },
   ];
 
@@ -85,6 +98,36 @@ const UserTable = ({ records }) => {
       </IconButton>
     );
   }
+
+  function renderBillCell(params) {
+    const selectedFormData = params.row;
+    const handleDownloadBillClick = () => {
+      // Handle the edit button click event
+      setShowBillPdfViewer(true);
+      setSelectedPatientData(selectedFormData);
+    };
+    if (isMobile) {
+      return (
+        <PDFDownloadLink
+          document={<PatientData patient={selectedFormData} />}
+          fileName={"patient_bill.pdf"}
+        >
+          {({ blob, url, loading, error }) => (
+            <IconButton>
+              <ReceiptLongIcon />
+            </IconButton>
+          )}
+        </PDFDownloadLink>
+      );
+    } else {
+      return (
+        <IconButton onClick={handleDownloadBillClick}>
+          <ReceiptLongIcon />
+        </IconButton>
+      );
+    }
+  };
+
 
   function renderDownloadLetterPad(params) {
     const selectedFormData = params.row;
@@ -117,7 +160,7 @@ const UserTable = ({ records }) => {
   }
 
   function renderDeleteCell(params) {
-    const handleDeleteClick = () => {};
+    const handleDeleteClick = () => { };
 
     return (
       <IconButton onClick={handleDeleteClick}>
@@ -177,25 +220,16 @@ const UserTable = ({ records }) => {
           onRowSelectionModelChange={handleSelectionChange}
         />
       </div>
-      {/* Dialog for PDF Viewer */}
-      <Dialog
-        open={showPdfViewer}
+      {/* Dialog for Letter PDF Viewer */}
+      <PDFDialog open={showPdfViewer}
         onClose={handlePdfViewerClose}
-        fullWidth={true}
-        maxWidth={"md"}
-      >
-        <DialogTitle sx={{ display: "flex", justifyContent: "space-between" }}>
-          PDF Viewer
-          <IconButton onClick={handlePdfViewerClose}>
-            <CloseIcon />
-          </IconButton>
-        </DialogTitle>
-        <DialogContent>
-          <PDFViewer width="100%" height="600px">
-            <PatientData patient={selectedPatientData} />
-          </PDFViewer>
-        </DialogContent>
-      </Dialog>
+        data={<PatientData patient={selectedPatientData} />} />
+
+      {/* Dialog for Patient Bill PDF Viewer */}
+      <PDFDialog open={showBillPdfViewer}
+        onClose={handleBillPdfViewerClose}
+        data={<PatientData patient={selectedPatientData} />} />
+
     </>
   );
 };

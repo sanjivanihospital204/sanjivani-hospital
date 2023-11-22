@@ -9,12 +9,13 @@ import {
   TextField,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { MessageBarContext } from "../../App";
 import { CREATE_PATIENT, POST_API, UPDATE_PATIENT } from "../../Services/api";
 import { getDateFormate } from "../../Services/util";
+import MultipleSelect from "../mui/MultiSelect";
 
 // style
 const FormStyle = styled("form")(({ theme }) => ({
@@ -63,6 +64,8 @@ const FormStyle = styled("form")(({ theme }) => ({
 
 const RegisterPatientForm = ({ data, editPatient, pId }) => {
   const { messageBar, setMessageBar } = useContext(MessageBarContext);
+  const [billCharges, setBillCharges] = useState([]);
+
 
   const navigate = useNavigate();
 
@@ -83,7 +86,7 @@ const RegisterPatientForm = ({ data, editPatient, pId }) => {
       gender: "",
       age: "",
       referDoctor: "",
-      consultantDoctor: ""
+      consultantDoctor: "",
     },
   });
 
@@ -98,6 +101,7 @@ const RegisterPatientForm = ({ data, editPatient, pId }) => {
       setValue("gender", data.gender);
       setValue("referDoctor", data.referDoctor);
       setValue("consultantDoctor", data.consultantDoctor);
+      setBillCharges(data.billCharges)
     }
   }, [data]);
 
@@ -109,8 +113,9 @@ const RegisterPatientForm = ({ data, editPatient, pId }) => {
         ? {
           ...data,
           _id: pId,
+          billCharges: billCharges,
         }
-        : data
+        : { ...data, billCharges: billCharges }
     );
     if (patientResponse?.status === "done") {
       setMessageBar({
@@ -230,11 +235,6 @@ const RegisterPatientForm = ({ data, editPatient, pId }) => {
                 control={<Radio />}
                 label="Female"
               />
-              {/* <FormControlLabel
-                  value="other"
-                  control={<Radio />}
-                  label="Other"
-                /> */}
             </RadioGroup>
           )}
         />
@@ -283,6 +283,8 @@ const RegisterPatientForm = ({ data, editPatient, pId }) => {
           InputLabelProps={{ shrink: true }}
         />
       </Box>
+
+      <MultipleSelect billCharges={billCharges} setBillCharges={setBillCharges} />
 
       <Button type="submit" variant="contained" disableElevation>
         {editPatient ? "UPDATE" : "SUBMIT"}

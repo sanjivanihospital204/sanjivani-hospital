@@ -9,7 +9,8 @@ const patient_schema = new mongoose.Schema({
   gender: String,
   age: String,
   referDoctor: String,
-  consultantDoctor: String
+  consultantDoctor: String,
+  billCharges: [String],
 });
 
 const admin_schema = new mongoose.Schema(
