@@ -85,6 +85,7 @@ const RegisterPatientForm = ({ data, editPatient, pId }) => {
     formState: { errors },
     setValue,
     control,
+    reset
   } = useForm({
     defaultValues: {
       name: "",
@@ -113,22 +114,23 @@ const RegisterPatientForm = ({ data, editPatient, pId }) => {
 
   useEffect(() => {
     if (Object.keys(data).length > 0) {
-      setValue("name", data.name);
-      setValue("date", getDateFormate(data.date));
-      setValue("address", data.address);
-      setValue("contactNumber", data.contactNumber);
-      setValue("weight", data.weight);
-      setValue("age", data.age);
-      setValue("gender", data.gender);
-      setValue("referDoctor", data.referDoctor);
-      setValue("consultantDoctor", data.consultantDoctor);
-      // setBillCharges(data.billCharges)
+      reset({
+        billCharges: data.billCharges,
+        name: data.name,
+        date: getDateFormate(data.date),
+        address: data.address,
+        contactNumber: data.contactNumber,
+        weight: data.weight,
+        age: data.age,
+        gender: data.gender,
+        referDoctor: data.referDoctor,
+        consultantDoctor: data.consultantDoctor
+      });
     }
   }, [data]);
 
   // submit
   const onSubmit = async (data) => {
-
     const patientResponse = await POST_API(
       editPatient ? UPDATE_PATIENT : CREATE_PATIENT,
       editPatient

@@ -12,6 +12,7 @@ const getAllPatients = async () => {
 
 const createNewPatient = async (data) => {
   try {
+    console.log("datadatadatadatadatadata",data);
     const user = new schema.patientSchema(data);
     const savedUser = await user.save();
     if (savedUser) {
