@@ -1,21 +1,26 @@
 import { Button, InputAdornment } from "@material-ui/core";
 import { styled } from "@material-ui/styles";
+import DeleteIcon from '@mui/icons-material/Delete';
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import {
   FormControl,
   FormControlLabel,
   FormLabel,
+  InputLabel,
+  MenuItem,
   Radio,
   RadioGroup,
+  Select,
   TextField,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { useContext, useEffect, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { MessageBarContext } from "../../App";
 import { CREATE_PATIENT, POST_API, UPDATE_PATIENT } from "../../Services/api";
 import { getDateFormate } from "../../Services/util";
-import MultipleSelect from "../mui/MultiSelect";
+
 
 // style
 const FormStyle = styled("form")(({ theme }) => ({
@@ -64,8 +69,12 @@ const FormStyle = styled("form")(({ theme }) => ({
 
 const RegisterPatientForm = ({ data, editPatient, pId }) => {
   const { messageBar, setMessageBar } = useContext(MessageBarContext);
-  const [billCharges, setBillCharges] = useState([]);
 
+  const [selectedBillCharge, setSelectedBillCharge] = useState('');
+
+  const handleChange = (event) => {
+    setSelectedBillCharge(event.target.value);
+  };
 
   const navigate = useNavigate();
 
@@ -90,6 +99,18 @@ const RegisterPatientForm = ({ data, editPatient, pId }) => {
     },
   });
 
+  const { fields, remove, append } = useFieldArray({
+    control,
+    name: "billCharges"
+  });
+
+  const billChargesList = [
+    'First Tapas Fee - 100',
+    'Second Tapas Fee - 100',
+    'Emergency Tapas Fee - 100',
+    'I.C.U Tapas Fee - 100',
+  ];
+
   useEffect(() => {
     if (Object.keys(data).length > 0) {
       setValue("name", data.name);
@@ -101,21 +122,21 @@ const RegisterPatientForm = ({ data, editPatient, pId }) => {
       setValue("gender", data.gender);
       setValue("referDoctor", data.referDoctor);
       setValue("consultantDoctor", data.consultantDoctor);
-      setBillCharges(data.billCharges)
+      // setBillCharges(data.billCharges)
     }
   }, [data]);
 
   // submit
   const onSubmit = async (data) => {
+
     const patientResponse = await POST_API(
       editPatient ? UPDATE_PATIENT : CREATE_PATIENT,
       editPatient
         ? {
           ...data,
           _id: pId,
-          billCharges: billCharges,
         }
-        : { ...data, billCharges: billCharges }
+        : data
     );
     if (patientResponse?.status === "done") {
       setMessageBar({
@@ -284,7 +305,56 @@ const RegisterPatientForm = ({ data, editPatient, pId }) => {
         />
       </Box>
 
-      <MultipleSelect billCharges={billCharges} setBillCharges={setBillCharges} />
+      {fields.map(({ id, chargeList, days }, index) => (
+        <div key={id}>
+          <Box
+            sx={{
+              display: "grid",
+              gap: { xs: 3, sm: 2 },
+              gridTemplateColumns: { xs: "1fr", sm: "5fr 3fr 1fr" },
+            }}
+          >
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">List</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="billCharges-${index}"
+                // value={selectedBillCharge}
+                label="Age"
+                onChange={handleChange}
+                defaultValue={chargeList}
+                {...register(`billCharges[${index}].chargeList`)}
+              >
+                {billChargesList.map((name) => (
+                  <MenuItem
+                    key={name}
+                    value={name}
+                  >
+                    {name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
+            <TextField
+              variant="outlined"
+              fullWidth
+              type="number"
+              label="Days"
+              {...register(`billCharges[${index}].days`)}
+              InputLabelProps={{ shrink: true }}
+              defaultValue={days}
+            />
+            <Button variant="contained" startIcon={<DeleteIcon />} onClick={() => remove(index)} color="error">
+              Delete
+            </Button>
+          </Box>
+        </div>
+      ))}
+
+      <Button variant="outlined" endIcon={<ReceiptLongIcon />} onClick={() => append({})}>
+        Add Bill Charges
+      </Button>
 
       <Button type="submit" variant="contained" disableElevation>
         {editPatient ? "UPDATE" : "SUBMIT"}

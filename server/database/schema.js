@@ -1,5 +1,10 @@
 const mongoose = require("mongoose");
 
+const billChargesSchema = new mongoose.Schema({
+  chargeList: String,
+  days: Number,
+});
+
 const patient_schema = new mongoose.Schema({
   name: String,
   date: Date,
@@ -10,7 +15,7 @@ const patient_schema = new mongoose.Schema({
   age: String,
   referDoctor: String,
   consultantDoctor: String,
-  billCharges: [String],
+  billCharges: [billChargesSchema],
 });
 
 const admin_schema = new mongoose.Schema(
