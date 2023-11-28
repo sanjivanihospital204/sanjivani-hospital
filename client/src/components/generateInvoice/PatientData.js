@@ -71,8 +71,8 @@ const styles = StyleSheet.create({
     borderBottom: "1px dotted #000",
     fontSize: 12,
   },
-  w80: {
-    width: "80%",
+  w60: {
+    width: "60%",
   },
   w70: {
     width: "70%",
@@ -83,14 +83,11 @@ const styles = StyleSheet.create({
   w40: {
     width: "40%",
   },
-  w20: {
-    width: "20%",
+  w25: {
+    width: "25%",
   },
   w50: {
     width: "50%",
-  },
-  w60: {
-    width: "60%",
   },
   w100: {
     width: "100%",
@@ -104,32 +101,30 @@ const PatientData = ({ patient }) => (
         <View style={styles.header}>
           <Header />
           <View style={styles.rowContainer}>
-            <View style={[styles.w70, styles.rowContainer]}>
-              <Text style={styles.label}>નામ :</Text>
+            <View style={[styles.w50, styles.rowContainer]}>
+              <Text style={styles.label}>Name :</Text>
               <Text style={styles.value}>{patient?.name}</Text>
             </View>
-            <View style={[styles.w30, styles.rowContainer]}>
-              <Text style={styles.label}>તારીખ :</Text>
-              <Text style={styles.value}>{patient?.date}</Text>
-            </View>
-          </View>
-          <View style={styles.rowContainer}>
-            <View style={[styles.w100, styles.rowContainer]}>
-              <Text style={styles.label}>સરનામું :</Text>
+            <View style={[styles.w50, styles.rowContainer]}>
+              <Text style={styles.label}>Address :</Text>
               <Text style={styles.value}>{patient?.address}</Text>
             </View>
           </View>
           <View style={styles.rowContainer}>
-            <View style={[styles.w40, styles.rowContainer]}>
-              <Text style={styles.label}>જાતિ :</Text>
+            <View style={[styles.w25, styles.rowContainer]}>
+              <Text style={styles.label}>Date :</Text>
+              <Text style={styles.value}>{patient?.date}</Text>
+            </View>
+            <View style={[styles.w25, styles.rowContainer]}>
+              <Text style={styles.label}>Gender :</Text>
               <Text style={styles.value}>{patient?.gender}</Text>
             </View>
-            <View style={[styles.w30, styles.rowContainer]}>
-              <Text style={styles.label}>ઉંમર :</Text>
+            <View style={[styles.w25, styles.rowContainer]}>
+              <Text style={styles.label}>Age :</Text>
               <Text style={styles.value}>{patient?.age}</Text>
             </View>
-            <View style={[styles.w30, styles.rowContainer]}>
-              <Text style={styles.label}>વજન :</Text>
+            <View style={[styles.w25, styles.rowContainer]}>
+              <Text style={styles.label}>Weight :</Text>
               <Text style={styles.value}>{patient?.weight}</Text>
             </View>
           </View>

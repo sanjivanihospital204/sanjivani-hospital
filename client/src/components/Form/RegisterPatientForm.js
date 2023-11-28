@@ -106,11 +106,19 @@ const RegisterPatientForm = ({ data, editPatient, pId }) => {
   });
 
   const billChargesList = [
-    'First Tapas Fee - 100',
-    'Second Tapas Fee - 100',
-    'Emergency Tapas Fee - 100',
-    'I.C.U Tapas Fee - 100',
-  ];
+    'Doctor visit charge - 1000',
+    'Medical officer visit charge - 500',
+    'Nursing staff charge - 300',
+    'Oxygen charge - 1000',
+    'Biomedical waste charges - 200',
+    'Dressing charge(small) - 100',
+    'Dressing charge (big) - 300',
+    'Day care admission charges - 500',
+    'Emergency room charge - 2000',
+    'Admission charge - 250',
+    'Multipara monitor charge - 500',
+    'Infusion pump charge - 500',
+  ];  
 
   useEffect(() => {
     if (Object.keys(data).length > 0) {

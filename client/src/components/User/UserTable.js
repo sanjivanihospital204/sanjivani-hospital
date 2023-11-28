@@ -12,6 +12,7 @@ import { getDateFormate } from "../../Services/util";
 import PatientData from "../generateInvoice/PatientData";
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import PDFDialog from "../PDFDialog";
+import PatientBill from "../generateInvoice/PatientBill";
 
 const UserTable = ({ records }) => {
   const [tableData, setTableData] = useState({});
@@ -109,7 +110,7 @@ const UserTable = ({ records }) => {
     if (isMobile) {
       return (
         <PDFDownloadLink
-          document={<PatientData patient={selectedFormData} />}
+          document={<PatientBill patient={selectedFormData} />}
           fileName={"patient_bill.pdf"}
         >
           {({ blob, url, loading, error }) => (
@@ -228,7 +229,7 @@ const UserTable = ({ records }) => {
       {/* Dialog for Patient Bill PDF Viewer */}
       <PDFDialog open={showBillPdfViewer}
         onClose={handleBillPdfViewerClose}
-        data={<PatientData patient={selectedPatientData} />} />
+        data={<PatientBill patient={selectedPatientData} />} />
 
     </>
   );

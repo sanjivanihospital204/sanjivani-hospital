@@ -1,12 +1,10 @@
-import React from "react";
 import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
   Image,
+  StyleSheet,
+  Text,
+  View
 } from "@react-pdf/renderer";
+import React from "react";
 const logo = require("../../images/logo.png"); // Replace with the actual path to your logo
 
 const styles = StyleSheet.create({
@@ -15,13 +13,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   italicName: {
-    color: "#FFD580",
+    color: "#003e9b",
     textAlign: "center",
     margin: 0,
     fontSize: 10,
   },
   shreeGanesh: {
-    color: "purple",
+    color: "#003e9b",
     textAlign: "center",
     margin: 0,
     fontWeight: 600,
@@ -38,19 +36,19 @@ const styles = StyleSheet.create({
   sanjivani: {
     fontSize: 30,
     fontWeight: 600,
-    color: "#990000",
+    color: "#003e9b",
   },
   hospital: {
     fontSize: 20,
     fontWeight: 600,
-    color: "#204060",
+    color: "#003e9b",
     marginTop: 7,
     marginLeft: 3,
   },
   icu: {
-    fontSize: 18,
+    fontSize: 10,
     margin: 0,
-    color: "#204060",
+    color: "#003e9b",
   },
   content: {
     fontWeight: 600,
@@ -59,17 +57,17 @@ const styles = StyleSheet.create({
     fontSize: 11,
   },
   contentH2: {
-    color: "#b32d00",
+    color: "#003e9b",
     fontWeight: 600,
     fontSize: 12,
     margin: 0,
   },
   contentP: {
     margin: 0,
-    color: "#005ce6",
+    color: "#003e9b",
   },
   contentDegree: {
-    color: "#204060",
+    color: "#003e9b",
   },
   headerBottom: {
     backgroundColor: "#0073e6",
@@ -83,9 +81,32 @@ const styles = StyleSheet.create({
   headerBottomSpan: {
     padding: 5,
   },
+  table: {
+    display: "table",
+    width: "auto",
+    marginTop: 3
+  },
+  tableRow: {
+    flexDirection: "row",
+    width: "100%",
+  },
+  tableCell: {
+    padding: 5,
+    border: 1,
+    color: "#003e9b",
+    fontSize: 10,
+    borderRadius: 3,
+    borderColor: "#003e9b"
+  },
+  w25Cell: {
+    width: "25%",
+  },
+  w100Cell: {
+    width: "100%",
+  }
 });
 
-const Header = () => (
+const BillHeader = ({patient}) => (
   <>
     <View>
       <Text style={styles.shreeGanesh}>|| શ્રી ગણેશાય નમઃ ||</Text>
@@ -99,7 +120,9 @@ const Header = () => (
             <Text style={styles.sanjivani}>સંજીવની</Text>
             <Text style={styles.hospital}>હોસ્પિટલ</Text>
           </View>
-          <Text style={styles.icu}>આઈ.સી.યુ. એન્ડ નર્સીંગ હોમ</Text>
+          <View style={[styles.row, { justifyContent: 'flex-end' }]}>
+            <Text style={styles.icu}>આઈ.સી.યુ. એન્ડ નર્સીંગ હોમ</Text>
+          </View>
         </View>
       </View>
       <View style={[styles.content, { alignItems: 'flex-end' }]}>
@@ -111,15 +134,22 @@ const Header = () => (
         <Text style={styles.contentP}>ફેફસા અને હૃદયરોગના નિષ્ણાંત</Text>
       </View>
     </View>
-    <View style={[styles.row, styles.headerBottom]}>
-      <Text style={styles.headerBottomSpan}>ICU |</Text>
-      <Text style={styles.headerBottomSpan}>&nbsp;મેડીકલ સ્ટોર |</Text>
-      <Text style={styles.headerBottomSpan}>&nbsp;એક્સ રે વિભાગ |</Text>
-      <Text style={styles.headerBottomSpan}>&nbsp;લેબોરેટરી વિભાગ |</Text>
-      <Text style={styles.headerBottomSpan}>&nbsp; પોઈઝન સેન્ટર |</Text>
-      <Text style={styles.headerBottomSpan}>&nbsp;ઈમરજન્સી વિભાગ</Text>
+
+    <View style={styles.table}>
+      <View style={styles.tableRow}>
+        <Text style={[styles.tableCell, styles.w25Cell]}>Bill No.:</Text>
+        <Text style={[styles.tableCell, styles.w25Cell]}>InDoor No.:</Text>
+        <Text style={[styles.tableCell, styles.w25Cell]}>OutDoor No.:</Text>
+        <Text style={[styles.tableCell, styles.w25Cell]}>Date:</Text>
+      </View>
+      <View style={styles.tableRow}>
+        <Text style={[styles.tableCell, styles.w100Cell]}>Patient Name.: {patient?.name}</Text>
+      </View>
+      <View style={styles.tableRow}>
+        <Text style={[styles.tableCell, styles.w100Cell]}>Address: {patient?.address}</Text>
+      </View>
     </View>
   </>
 );
 
-export default Header;
+export default BillHeader;

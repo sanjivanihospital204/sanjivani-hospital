@@ -8,6 +8,8 @@ import './App.css';
 import PdfDocument from './components/generateInvoice/Invoice';
 import InvoiceData from './jsonData/InvoiceData';
 import PatientData from "./components/generateInvoice/PatientData";
+import PatientBill from "./components/generateInvoice/PatientBill";
+import InvoiceTableRow from "./components/generateInvoice/InvoiceTableRow";
 
 export const MessageBarContext = createContext();
 
@@ -19,7 +21,12 @@ const PdfDemo = () => {
   return (
     <div className="App">
       <PDFViewer width={800} height={500} showToolbar={false}>
-      <PatientData patient={selectedPatientData} />
+      {/* <PatientData patient={selectedPatientData} /> */}
+      {/* <PatientBill patient={selectedPatientData} /> */}
+
+<InvoiceTableRow items={InvoiceData.items} />
+
+
         {/* <PdfDocument invoicedata={InvoiceData} /> */}
       </PDFViewer>
 
