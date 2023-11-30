@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import boldFont2 from "../../fonts/NotoSansGujarati-Bold.ttf";
 import font2 from "../../fonts/NotoSansGujarati-Regular.ttf";
 
@@ -9,12 +9,8 @@ import {
   StyleSheet,
   View
 } from "@react-pdf/renderer";
-import InvoiceData from "../../jsonData/InvoiceData";
-import Footer from "./Footer";
-import Header from "./Header";
-import InvoiceTableRow from "./InvoiceTableRow";
-import BillTable from "./BillTable";
 import BillHeader from "./BillHeader";
+import BillTable from "./BillTable";
 const logo = require("../../images/logo.png"); // Replace with the actual path to your logo
 
 Font.register({
@@ -57,21 +53,19 @@ const styles = StyleSheet.create({
 });
 
 const PatientBill = ({ patient }) => (
-  <Fragment>
-    <Document>
-      <Page size="A4" style={styles.page}>
-        <View style={styles.header}>
-          <BillHeader patient={patient}/>
-        </View>
-        <View style={styles.mainContent}>
-          <BillTable billCharges={patient.billCharges} />
-        </View>
-        <View style={styles.footer}>
-          {/* <Footer /> */}
-        </View>
-      </Page>
-    </Document>
-  </Fragment>
+  <Document>
+    <Page size="A4" style={styles.page}>
+      <View style={styles.header}>
+        <BillHeader patient={patient} />
+      </View>
+      <View style={styles.mainContent}>
+        <BillTable billCharges={patient?.billCharges} />
+      </View>
+      <View style={styles.footer}>
+        {/* <Footer /> */}
+      </View>
+    </Page>
+  </Document>
 );
 
 export default PatientBill;

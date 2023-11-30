@@ -1,12 +1,10 @@
-import React from "react";
 import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
   Image,
+  StyleSheet,
+  Text,
+  View
 } from "@react-pdf/renderer";
+import React from "react";
 const logo = require("../../images/logo.png"); // Replace with the actual path to your logo
 
 const styles = StyleSheet.create({
@@ -29,6 +27,7 @@ const styles = StyleSheet.create({
   },
   header: {
     justifyContent: "space-between",
+    marginTop: 5
   },
   logo: {
     width: 60,
@@ -36,7 +35,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   sanjivani: {
-    fontSize: 30,
+    fontSize: 20,
     fontWeight: 600,
     color: "#990000",
   },
@@ -44,11 +43,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 600,
     color: "#204060",
-    marginTop: 7,
     marginLeft: 3,
   },
   icu: {
-    fontSize: 18,
+    fontSize: 14,
     margin: 0,
     color: "#204060",
   },
@@ -89,26 +87,33 @@ const Header = () => (
   <>
     <View>
       <Text style={styles.shreeGanesh}>|| શ્રી ગણેશાય નમઃ ||</Text>
-      <Text style={styles.italicName}>Sanjivani</Text>
+      {/* <Text style={styles.italicName}>Sanjivani</Text> */}
     </View>
     <View style={[styles.row, styles.header]}>
       <View style={[styles.row]}>
-        <Image style={styles.logo} src={logo} alt="Logo" />
+        <View style={[styles.content, { alignItems: 'flex-start' }]}>
+          <Text style={styles.contentH2}>ડૉ. મિલન સી મકવાણા</Text>
+          <Text style={styles.contentDegree}>M.B., D.T.C.D., F.I.C.M.</Text>
+          <Text style={styles.contentP}>
+            કન્સલ્ટન્ટ ફીઝીશ્યન એન્ડ ઈન્ટેન્સીવીસ્ટ
+          </Text>
+          <Text style={styles.contentP}>ફેફસા અને હૃદયરોગના નિષ્ણાંત</Text>
+        </View>
+      </View>
+
+      <View style={[styles.row]}>
+        {/* <Image style={styles.logo} src={logo} alt="Logo" /> */}
         <View>
-          <View style={[styles.row]}>
-            <Text style={styles.sanjivani}>સંજીવની</Text>
-            <Text style={styles.hospital}>હોસ્પિટલ</Text>
-          </View>
-          <Text style={styles.icu}>આઈ.સી.યુ. એન્ડ નર્સીંગ હોમ</Text>
+        <View style={[styles.row, { justifyContent: 'center' }]}>
+          <Text style={styles.sanjivani}>સંજીવની</Text>
+          <Text style={styles.hospital}>હોસ્પિટલ</Text>
+        </View>
+        <Text style={styles.icu}>આઈ.સી.યુ. એન્ડ નર્સીંગ હોમ</Text>
         </View>
       </View>
       <View style={[styles.content, { alignItems: 'flex-end' }]}>
-        <Text style={styles.contentH2}>ડૉ. મિલન સી મકવાણા</Text>
-        <Text style={styles.contentDegree}>M.B., D.T.C.D., F.I.C.M.</Text>
-        <Text style={styles.contentP}>
-          કન્સલ્ટન્ટ ફીઝીશ્યન એન્ડ ઈન્ટેન્સીવીસ્ટ
-        </Text>
-        <Text style={styles.contentP}>ફેફસા અને હૃદયરોગના નિષ્ણાંત</Text>
+        <Text style={styles.contentH2}>ડૉ. સપના આર આઈલાણી</Text>
+        <Text style={styles.contentDegree}>B.H.M.S.</Text>
       </View>
     </View>
     <View style={[styles.row, styles.headerBottom]}>

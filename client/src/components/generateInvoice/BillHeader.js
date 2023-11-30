@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
     margin: 0,
     color: "#003e9b",
+    fontWeight: 600,
   },
   content: {
     fontWeight: 600,
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const BillHeader = ({patient}) => (
+const BillHeader = ({ patient }) => (
   <>
     <View>
       <Text style={styles.shreeGanesh}>|| શ્રી ગણેશાય નમઃ ||</Text>

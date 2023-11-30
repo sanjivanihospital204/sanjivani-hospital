@@ -1,18 +1,18 @@
-import React, { Fragment } from "react";
-import font from "../../fonts/NotoSansGujarati-Regular.ttf";
+import React from "react";
 import boldFont from "../../fonts/NotoSansGujarati-Bold.ttf";
+import font from "../../fonts/NotoSansGujarati-Regular.ttf";
 
 import {
   Document,
+  Font,
+  Image,
   Page,
+  StyleSheet,
   Text,
   View,
-  StyleSheet,
-  Image,
-  Font,
 } from "@react-pdf/renderer";
-import Header from "./Header";
 import Footer from "./Footer";
+import Header from "./Header";
 const logo = require("../../images/logo.png"); // Replace with the actual path to your logo
 
 Font.register({
@@ -95,60 +95,58 @@ const styles = StyleSheet.create({
 });
 
 const PatientData = ({ patient }) => (
-  <Fragment>
-    <Document>
-      <Page size="A4" style={styles.page}>
-        <View style={styles.header}>
-          <Header />
-          <View style={styles.rowContainer}>
-            <View style={[styles.w50, styles.rowContainer]}>
-              <Text style={styles.label}>Name :</Text>
-              <Text style={styles.value}>{patient?.name}</Text>
-            </View>
-            <View style={[styles.w50, styles.rowContainer]}>
-              <Text style={styles.label}>Address :</Text>
-              <Text style={styles.value}>{patient?.address}</Text>
-            </View>
+  <Document>
+    <Page size="A4" style={styles.page}>
+      <View style={styles.header}>
+        <Header />
+        <View style={styles.rowContainer}>
+          <View style={[styles.w50, styles.rowContainer]}>
+            <Text style={styles.label}>Name :</Text>
+            <Text style={styles.value}>{patient?.name}</Text>
           </View>
-          <View style={styles.rowContainer}>
-            <View style={[styles.w25, styles.rowContainer]}>
-              <Text style={styles.label}>Date :</Text>
-              <Text style={styles.value}>{patient?.date}</Text>
-            </View>
-            <View style={[styles.w25, styles.rowContainer]}>
-              <Text style={styles.label}>Gender :</Text>
-              <Text style={styles.value}>{patient?.gender}</Text>
-            </View>
-            <View style={[styles.w25, styles.rowContainer]}>
-              <Text style={styles.label}>Age :</Text>
-              <Text style={styles.value}>{patient?.age}</Text>
-            </View>
-            <View style={[styles.w25, styles.rowContainer]}>
-              <Text style={styles.label}>Weight :</Text>
-              <Text style={styles.value}>{patient?.weight}</Text>
-            </View>
+          <View style={[styles.w50, styles.rowContainer]}>
+            <Text style={styles.label}>Address :</Text>
+            <Text style={styles.value}>{patient?.address}</Text>
           </View>
-          <View style={styles.rowContainer}>
-            <View style={[styles.w40, styles.rowContainer]}>
-              <Text style={styles.label}>ReferDr :</Text>
-              <Text style={styles.value}>{patient?.referDoctor}</Text>
-            </View>
-            <View style={[styles.w60, styles.rowContainer]}>
-              <Text style={styles.label}>ConsultantDr :</Text>
-              <Text style={styles.value}>{patient?.consultantDoctor}</Text>
-            </View>
+        </View>
+        <View style={styles.rowContainer}>
+          <View style={[styles.w25, styles.rowContainer]}>
+            <Text style={styles.label}>Date :</Text>
+            <Text style={styles.value}>{patient?.date}</Text>
           </View>
+          <View style={[styles.w25, styles.rowContainer]}>
+            <Text style={styles.label}>Gender :</Text>
+            <Text style={styles.value}>{patient?.gender}</Text>
+          </View>
+          <View style={[styles.w25, styles.rowContainer]}>
+            <Text style={styles.label}>Age :</Text>
+            <Text style={styles.value}>{patient?.age}</Text>
+          </View>
+          <View style={[styles.w25, styles.rowContainer]}>
+            <Text style={styles.label}>Weight :</Text>
+            <Text style={styles.value}>{patient?.weight}</Text>
+          </View>
+        </View>
+        <View style={styles.rowContainer}>
+          <View style={[styles.w40, styles.rowContainer]}>
+            <Text style={styles.label}>ReferDr :</Text>
+            <Text style={styles.value}>{patient?.referDoctor}</Text>
+          </View>
+          <View style={[styles.w60, styles.rowContainer]}>
+            <Text style={styles.label}>ConsultantDr :</Text>
+            <Text style={styles.value}>{patient?.consultantDoctor}</Text>
+          </View>
+        </View>
 
-        </View>
-        <View style={styles.mainContent}>
-          <Image style={styles.logo} src={logo} alt="Logo" />
-        </View>
-        <View style={styles.footer}>
-          <Footer />
-        </View>
-      </Page>
-    </Document>
-  </Fragment>
+      </View>
+      <View style={styles.mainContent}>
+        <Image style={styles.logo} src={logo} alt="Logo" />
+      </View>
+      <View style={styles.footer}>
+        <Footer />
+      </View>
+    </Page>
+  </Document>
 );
 
 export default PatientData;

@@ -1,18 +1,17 @@
-import CloseIcon from "@mui/icons-material/Close";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import FilePresentIcon from "@mui/icons-material/FilePresent";
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import SearchIcon from "@mui/icons-material/Search";
-import { Dialog, DialogContent, DialogTitle, IconButton, InputAdornment, TextField } from "@mui/material";
+import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { getDateFormate } from "../../Services/util";
-import PatientData from "../generateInvoice/PatientData";
-import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import PDFDialog from "../PDFDialog";
 import PatientBill from "../generateInvoice/PatientBill";
+import PatientData from "../generateInvoice/PatientData";
 
 const UserTable = ({ records }) => {
   const [tableData, setTableData] = useState({});
