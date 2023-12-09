@@ -12,9 +12,10 @@ import {
   RadioGroup,
   Select,
   TextField,
+  Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { MessageBarContext } from "../../App";
@@ -68,13 +69,7 @@ const FormStyle = styled("form")(({ theme }) => ({
 }));
 
 const RegisterPatientForm = ({ data, editPatient, pId }) => {
-  const { messageBar, setMessageBar } = useContext(MessageBarContext);
-
-  const [selectedBillCharge, setSelectedBillCharge] = useState('');
-
-  const handleChange = (event) => {
-    setSelectedBillCharge(event.target.value);
-  };
+  const { setMessageBar } = useContext(MessageBarContext);
 
   const navigate = useNavigate();
 
@@ -83,7 +78,6 @@ const RegisterPatientForm = ({ data, editPatient, pId }) => {
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
     control,
     reset
   } = useForm({
@@ -118,7 +112,7 @@ const RegisterPatientForm = ({ data, editPatient, pId }) => {
     'Admission charge - 250',
     'Multipara monitor charge - 500',
     'Infusion pump charge - 500',
-  ];  
+  ];
 
   useEffect(() => {
     if (Object.keys(data).length > 0) {
@@ -173,7 +167,7 @@ const RegisterPatientForm = ({ data, editPatient, pId }) => {
         type="date"
         label="Date Of Entry"
         {...register("date", { required: true })}
-        error={errors.date ? true : false}
+        error={errors.date}
         helperText={errors.date && "Enter a valid date"}
         style={{ width: "100%" }}
         InputLabelProps={{ shrink: true }}
@@ -191,7 +185,7 @@ const RegisterPatientForm = ({ data, editPatient, pId }) => {
           type="text"
           label="Patient Name"
           {...register("name", { required: true })}
-          error={errors.name ? true : false}
+          error={errors.name}
           helperText={errors.name && "Enter a valid Patient Name"}
           InputLabelProps={{ shrink: true }}
         />
@@ -208,7 +202,7 @@ const RegisterPatientForm = ({ data, editPatient, pId }) => {
               message: "Enter a valid weight with exactly 3 digits",
             },
           })}
-          error={errors.weight ? true : false}
+          error={errors.weight}
           helperText={errors.weight && "Enter a valid weight"}
           InputLabelProps={{ shrink: true }}
           InputProps={{
@@ -228,7 +222,7 @@ const RegisterPatientForm = ({ data, editPatient, pId }) => {
               message: "Enter a valid weight with exactly 3 digits",
             },
           })}
-          error={errors.age ? true : false}
+          error={errors.age}
           helperText={errors.age && "Enter a valid Patient Age"}
           InputLabelProps={{ shrink: true }}
         />
@@ -245,7 +239,7 @@ const RegisterPatientForm = ({ data, editPatient, pId }) => {
               message: "Enter a valid weight with exactly 3 digits",
             },
           })}
-          error={errors.contactNumber ? true : false}
+          error={errors.contactNumber}
           helperText={errors.contactNumber && "Enter a valid Contact Number"}
           InputLabelProps={{ shrink: true }}
         />
@@ -280,7 +274,7 @@ const RegisterPatientForm = ({ data, editPatient, pId }) => {
         type="text"
         label="Patient Address"
         {...register("address", { required: true })}
-        error={errors.address ? true : false}
+        error={errors.address}
         helperText={errors.address && "Enter a valid address"}
         InputLabelProps={{ shrink: true }}
       />
@@ -298,7 +292,7 @@ const RegisterPatientForm = ({ data, editPatient, pId }) => {
           type="text"
           label="Refer Doctor"
           {...register("referDoctor", { required: true })}
-          error={errors.referDoctor ? true : false}
+          error={errors.referDoctor}
           helperText={errors.referDoctor && "Refer Doctor"}
           InputLabelProps={{ shrink: true }}
         />
@@ -309,11 +303,13 @@ const RegisterPatientForm = ({ data, editPatient, pId }) => {
           type="text"
           label="Consultant Doctor"
           {...register("consultantDoctor", { required: true })}
-          error={errors.consultantDoctor ? true : false}
+          error={errors.consultantDoctor}
           helperText={errors.consultantDoctor && "Consultant Doctor"}
           InputLabelProps={{ shrink: true }}
         />
       </Box>
+
+      <Typography variant="h5" className="form-title">Bill Details</Typography>
 
       {fields.map(({ id, chargeList, days }, index) => (
         <div key={id}>
@@ -329,9 +325,7 @@ const RegisterPatientForm = ({ data, editPatient, pId }) => {
               <Select
                 labelId="demo-simple-select-label"
                 id="billCharges-${index}"
-                // value={selectedBillCharge}
                 label="Age"
-                onChange={handleChange}
                 defaultValue={chargeList}
                 {...register(`billCharges[${index}].chargeList`)}
               >

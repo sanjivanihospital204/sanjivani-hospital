@@ -1,4 +1,3 @@
-import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import FilePresentIcon from "@mui/icons-material/FilePresent";
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
@@ -159,38 +158,13 @@ const UserTable = ({ records }) => {
     }
   }
 
-  function renderDeleteCell(params) {
-    const handleDeleteClick = () => { };
-
-    return (
-      <IconButton onClick={handleDeleteClick}>
-        <DeleteIcon />
-      </IconButton>
-    );
-  }
-
-  function getDataByIndex(array, indices) {
-    const result = [];
-    for (const index of indices) {
-      if (index >= 0 && index < array.length) {
-        result.push(array[index]?._id);
-      }
-    }
-    return result;
-  }
-
-  const handleSelectionChange = (selectedItems) => {
-    const properties = getDataByIndex(tableData, selectedItems);
-    // selectedProperties(properties);
-  };
-
   const isMobile = window.innerWidth <= 600;
 
   return (
     <>
       <div style={{ height: 400, width: "100%" }}>
         <TextField
-          label="Search by Name"
+          label="Search Patient by Name"
           variant="outlined"
           fullWidth
           margin="normal"
@@ -217,7 +191,7 @@ const UserTable = ({ records }) => {
             overflowX: "scroll",
             width: `100%`,
           }}
-          onRowSelectionModelChange={handleSelectionChange}
+        // onRowSelectionModelChange={handleSelectionChange}
         />
       </div>
       {/* Dialog for Letter PDF Viewer */}

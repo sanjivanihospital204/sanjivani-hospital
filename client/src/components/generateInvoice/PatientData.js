@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   label: {
-    fontSize: 12,
+    fontSize: 9,
     fontWeight: 600,
   },
   value: {
@@ -69,13 +69,16 @@ const styles = StyleSheet.create({
     paddingLeft: 7,
     width: "85%",
     borderBottom: "1px dotted #000",
-    fontSize: 12,
+    fontSize: 9,
   },
   w60: {
     width: "60%",
   },
   w70: {
     width: "70%",
+  },
+  w15: {
+    width: "15%",
   },
   w30: {
     width: "30%",
@@ -85,6 +88,9 @@ const styles = StyleSheet.create({
   },
   w25: {
     width: "25%",
+  },
+  w20: {
+    width: "20%",
   },
   w50: {
     width: "50%",
@@ -100,39 +106,39 @@ const PatientData = ({ patient }) => (
       <View style={styles.header}>
         <Header />
         <View style={styles.rowContainer}>
-          <View style={[styles.w50, styles.rowContainer]}>
+          <View style={[styles.w40, styles.rowContainer]}>
             <Text style={styles.label}>Name :</Text>
             <Text style={styles.value}>{patient?.name}</Text>
           </View>
-          <View style={[styles.w50, styles.rowContainer]}>
-            <Text style={styles.label}>Address :</Text>
-            <Text style={styles.value}>{patient?.address}</Text>
-          </View>
-        </View>
-        <View style={styles.rowContainer}>
           <View style={[styles.w25, styles.rowContainer]}>
-            <Text style={styles.label}>Date :</Text>
-            <Text style={styles.value}>{patient?.date}</Text>
+            <Text style={styles.label}>Age/Sex :</Text>
+            <Text style={styles.value}>{patient?.age} Yrs / {patient?.gender}</Text>
           </View>
-          <View style={[styles.w25, styles.rowContainer]}>
-            <Text style={styles.label}>Gender :</Text>
-            <Text style={styles.value}>{patient?.gender}</Text>
-          </View>
-          <View style={[styles.w25, styles.rowContainer]}>
-            <Text style={styles.label}>Age :</Text>
-            <Text style={styles.value}>{patient?.age}</Text>
-          </View>
-          <View style={[styles.w25, styles.rowContainer]}>
+          <View style={[styles.w15, styles.rowContainer]}>
             <Text style={styles.label}>Weight :</Text>
             <Text style={styles.value}>{patient?.weight}</Text>
           </View>
+          <View style={[styles.w20, styles.rowContainer]}>
+            <Text style={styles.label}>Date :</Text>
+            <Text style={styles.value}>{patient?.date}</Text>
+          </View>
         </View>
         <View style={styles.rowContainer}>
+          <View style={[styles.w60, styles.rowContainer]}>
+            <Text style={styles.label}>Address :</Text>
+            <Text style={styles.value}>{patient?.address}</Text>
+          </View>
           <View style={[styles.w40, styles.rowContainer]}>
+            <Text style={styles.label}>Mo. :</Text>
+            <Text style={styles.value}>{patient?.contactNumber}</Text>
+          </View>
+        </View>
+        <View style={styles.rowContainer}>
+          <View style={[styles.w50, styles.rowContainer]}>
             <Text style={styles.label}>ReferDr :</Text>
             <Text style={styles.value}>{patient?.referDoctor}</Text>
           </View>
-          <View style={[styles.w60, styles.rowContainer]}>
+          <View style={[styles.w50, styles.rowContainer]}>
             <Text style={styles.label}>ConsultantDr :</Text>
             <Text style={styles.value}>{patient?.consultantDoctor}</Text>
           </View>

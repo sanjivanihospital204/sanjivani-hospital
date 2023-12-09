@@ -20,7 +20,7 @@ const Loader = () => {
             backgroundColor: 'rgba(255, 255, 255, 0.75)',
             zIndex: 50,
         }}>
-            <CircularProgress size={32} color="primary" />
+            <CircularProgress fourColor size={32} color="primary" />
         </div>
     );
 };
@@ -58,9 +58,9 @@ const ProtectedRoute = () => {
 
     if (loading) {
         return <Loader />; // Display the loader while loading
+    }else{
+        return userLoggedIn ? <Outlet /> : <Navigate to="/login" />;
     }
-
-    return userLoggedIn ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default ProtectedRoute;

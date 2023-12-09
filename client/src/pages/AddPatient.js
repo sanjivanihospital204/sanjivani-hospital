@@ -30,19 +30,16 @@ const AddPatient = () => {
   }, [patientId]);
 
   return (
-    <>
-      <DashboardLayout>
+    <DashboardLayout>
         <Helmet>
           <title> Patient | Sanjivni</title>
         </Helmet>
 
         <Container maxWidth="md" className="form_Container">
-          <Typography variant="h4">{editPatient ? `Edit ${patient?.name}'s Form` : 'Add Patient Form'} </Typography>
+          <Typography variant="h4" className="form-title">{editPatient ? `Edit ${patient?.name}'s Form` : 'Add Patient Form'} </Typography>
           <RegisterPatientForm data={patient} editPatient={editPatient} pId={pId} />
         </Container>
       </DashboardLayout>
-
-    </>
   );
 };
 

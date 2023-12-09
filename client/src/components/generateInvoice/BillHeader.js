@@ -102,6 +102,9 @@ const styles = StyleSheet.create({
   w25Cell: {
     width: "25%",
   },
+  w50Cell: {
+    width: "50%",
+  },
   w100Cell: {
     width: "100%",
   }
@@ -147,7 +150,8 @@ const BillHeader = ({ patient }) => (
         <Text style={[styles.tableCell, styles.w100Cell]}>Patient Name.: {patient?.name}</Text>
       </View>
       <View style={styles.tableRow}>
-        <Text style={[styles.tableCell, styles.w100Cell]}>Address: {patient?.address}</Text>
+        <Text style={[styles.tableCell, styles.w50Cell]}>Address: {patient?.address}</Text>
+        <Text style={[styles.tableCell, styles.w50Cell]}>Mo.: {patient?.contactNumber}</Text>
       </View>
     </View>
   </>

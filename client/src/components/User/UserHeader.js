@@ -34,7 +34,7 @@ const UserHeader = () => {
 
   return (
     <BoxStyle>
-      <Typography variant="h3">Sanjivni - Patients</Typography>
+      <Typography variant="h3" className="form-title">Sanjivni - Patients</Typography>
       <Button variant="contained" disableElevation startIcon={<BiPlus />} onClick={() => navigate("/patient")}>
         New Patient
       </Button>

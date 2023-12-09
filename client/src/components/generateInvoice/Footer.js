@@ -20,14 +20,13 @@ const styles = StyleSheet.create({
     height: 60,
   },
   hrs: {
-    fontSize: 25,
+    fontSize: 15,
     fontWeight: 600,
     color: "#eb550b",
     paddingLeft: 7,
-    marginTop: 10
   },
   emergencyText: {
-    fontSize: 17,
+    fontSize: 13,
     fontWeight: 600,
     color: "#0066cc",
     paddingLeft: 7,
@@ -40,7 +39,6 @@ const styles = StyleSheet.create({
     fontSize: 8,
   },
   centerContent: {
-    marginLeft: 15,
     alignItems: "center",
     textAlign: "center",
     display: "flex",
@@ -69,7 +67,7 @@ const styles = StyleSheet.create({
 
 const Footer = () => (
   <View style={[styles.row, styles.header]}>
-    <View style={[styles.row]}>
+    {/* <View style={[styles.row]}> */}
       <Image style={styles.logo} src={EmergencyLogo} alt="Logo" />
       <View>
         <View style={styles.footerContent}>
@@ -101,11 +99,17 @@ const Footer = () => (
           </View>
         </View>
       </View>
-    </View>
-    <View>
-      <Text style={styles.hrs}>૨૪ કલાક</Text>
-      <Text style={styles.emergencyText}>ઈમરજન્સી સારવાર</Text>
-    </View>
+      <View>
+        <View style={styles.footerContent}>
+          <View style={styles.centerContent}>
+            <Text style={styles.hrs}>૨૪ કલાક</Text>
+            <Text style={styles.emergencyText}>ઈમરજન્સી સારવાર</Text>
+            <Text style={styles.hrs}>૨૪ કલાક</Text>
+            <Text style={styles.emergencyText}>સિટી સ્કેન ની સુવિધા</Text>
+          </View>
+        </View>
+      </View>
+    {/* </View> */}
   </View>
 );
 

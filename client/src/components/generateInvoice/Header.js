@@ -73,10 +73,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#0073e6",
     fontWeight: 600,
     color: "#ffff",
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: 8,
+    marginBottom: 8,
     justifyContent: "center",
-    fontSize: 12,
+    fontSize: 10,
   },
   headerBottomSpan: {
     padding: 5,
@@ -91,6 +91,17 @@ const Header = () => (
     </View>
     <View style={[styles.row, styles.header]}>
       <View style={[styles.row]}>
+        <Image style={styles.logo} src={logo} alt="Logo" />
+        <View>
+          <View style={[styles.row, { justifyContent: 'center' }]}>
+            <Text style={styles.sanjivani}>સંજીવની</Text>
+            <Text style={styles.hospital}>હોસ્પિટલ</Text>
+          </View>
+          <Text style={styles.icu}>આઈ.સી.યુ. એન્ડ નર્સીંગ હોમ</Text>
+        </View>
+      </View>
+
+      <View style={[styles.row]}>
         <View style={[styles.content, { alignItems: 'flex-start' }]}>
           <Text style={styles.contentH2}>ડૉ. મિલન સી મકવાણા</Text>
           <Text style={styles.contentDegree}>M.B., D.T.C.D., F.I.C.M.</Text>
@@ -101,21 +112,12 @@ const Header = () => (
         </View>
       </View>
 
-      <View style={[styles.row]}>
-        {/* <Image style={styles.logo} src={logo} alt="Logo" /> */}
-        <View>
-        <View style={[styles.row, { justifyContent: 'center' }]}>
-          <Text style={styles.sanjivani}>સંજીવની</Text>
-          <Text style={styles.hospital}>હોસ્પિટલ</Text>
-        </View>
-        <Text style={styles.icu}>આઈ.સી.યુ. એન્ડ નર્સીંગ હોમ</Text>
-        </View>
-      </View>
       <View style={[styles.content, { alignItems: 'flex-end' }]}>
         <Text style={styles.contentH2}>ડૉ. સપના આર આઈલાણી</Text>
         <Text style={styles.contentDegree}>B.H.M.S.</Text>
       </View>
     </View>
+
     <View style={[styles.row, styles.headerBottom]}>
       <Text style={styles.headerBottomSpan}>ICU |</Text>
       <Text style={styles.headerBottomSpan}>&nbsp;મેડીકલ સ્ટોર |</Text>

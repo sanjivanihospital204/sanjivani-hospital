@@ -20,7 +20,12 @@
 .App {
   text-align: center;
 }
+
 .download-link {
   font-size: large;
   font-weight: bold;
+}
+
+.form-title {
+  color: rgb(0, 171, 85);
 }
