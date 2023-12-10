@@ -133,14 +133,20 @@ const RegisterPatientForm = ({ data, editPatient, pId }) => {
 
   // submit
   const onSubmit = async (data) => {
+  const filteredBillCharges = data.billCharges.filter(
+    (charge) => charge.chargeList && charge.days
+  );
+
+  const updatedData = { ...data, billCharges: filteredBillCharges };
+
     const patientResponse = await POST_API(
       editPatient ? UPDATE_PATIENT : CREATE_PATIENT,
       editPatient
         ? {
-          ...data,
+          ...updatedData,
           _id: pId,
         }
-        : data
+        : updatedData
     );
     if (patientResponse?.status === "done") {
       setMessageBar({
