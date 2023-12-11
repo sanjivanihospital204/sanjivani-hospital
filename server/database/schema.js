@@ -6,13 +6,14 @@ const billChargesSchema = new mongoose.Schema({
 });
 
 const patient_schema = new mongoose.Schema({
+  index: Number,
   name: String,
   date: Date,
   address: String,
-  weight: String,
-  contactNumber: String,
+  weight: Number,
+  contactNumber: Number,
   gender: String,
-  age: String,
+  age: Number,
   referDoctor: String,
   consultantDoctor: String,
   billCharges: [billChargesSchema],

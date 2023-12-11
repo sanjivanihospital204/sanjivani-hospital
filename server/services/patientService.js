@@ -12,7 +12,11 @@ const getAllPatients = async () => {
 
 const createNewPatient = async (data) => {
   try {
-    console.log("datadatadatadatadatadata",data);
+    const totalPatients = await schema.patientSchema.countDocuments();
+
+    // Set the index field based on the total count
+    data.index = totalPatients + 1;
+
     const user = new schema.patientSchema(data);
     const savedUser = await user.save();
     if (savedUser) {
