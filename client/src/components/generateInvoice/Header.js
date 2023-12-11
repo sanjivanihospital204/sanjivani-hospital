@@ -115,6 +115,9 @@ const Header = () => (
       <View style={[styles.content, { alignItems: 'flex-end' }]}>
         <Text style={styles.contentH2}>ડૉ. સપના આર આઈલાણી</Text>
         <Text style={styles.contentDegree}>B.H.M.S.</Text>
+        <Text style={styles.contentP}>
+        મેડિકલ ઓફિસર
+        </Text>
       </View>
     </View>
 
