@@ -141,7 +141,7 @@ const BillHeader = ({ patient }) => (
 
     <View style={styles.table}>
       <View style={styles.tableRow}>
-        <Text style={[styles.tableCell, styles.w25Cell]}>Bill No.:</Text>
+        <Text style={[styles.tableCell, styles.w25Cell]}>Bill No.: {patient?._id}</Text>
         <Text style={[styles.tableCell, styles.w25Cell]}>InDoor No.:</Text>
         <Text style={[styles.tableCell, styles.w25Cell]}>OutDoor No.:</Text>
         <Text style={[styles.tableCell, styles.w25Cell]}>Date:</Text>
