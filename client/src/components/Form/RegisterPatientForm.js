@@ -100,19 +100,35 @@ const RegisterPatientForm = ({ data, editPatient, pId }) => {
   });
 
   const billChargesList = [
-    'Doctor visit charge - 1000',
-    'Medical officer visit charge - 500',
-    'Nursing staff charge - 300',
-    'Oxygen charge - 1000',
-    'Biomedical waste charges - 200',
-    'Dressing charge(small) - 100',
-    'Dressing charge (big) - 300',
-    'Day care admission charges - 500',
-    'Emergency room charge - 2000',
-    'Admission charge - 250',
-    'Multipara monitor charge - 500',
-    'Infusion pump charge - 500',
-  ];
+    'FIRST CONSULTATION CHARGE - 100',
+    'SECOND CONSULTATION CHARGE - 50',
+    'EMERGENCY CONSULTATION CHARGE - 500',
+    'ECG CHARGE - 200',
+    'RBS CHARGE - 50',
+    'I.C.U. CHARGE - 3000',
+    'SPECIAL ROOM CHARGE - 2000',
+    'SEMI SPECIAL ROOM CHARGE - 1500',
+    'GENERAL WARD CHARGE - 1000',
+    'PRE OPERATIVE FITNESS CHARGE - 600',
+    'NEBULISATION CHARGE - 50',
+    'INTUBATION CHARGE - 1500',
+    'DEFIBRILLATOR CHARGE - 1000',
+    'I.C.D. CHARGE - 3000',
+    'PLUERAL FLUID TAPING CHARGE - 3000',
+    'ASCITIC FLUID TAPING CHARGE - 3000',
+    'DOCTOR VISIT CHARGE - 1000',
+    'MEDICAL OFFICER VISIT CHARGE - 500',
+    'NURSING STAFF CHARGE - 300',
+    'OXYGEN CHARGE - 1000',
+    'BIOMEDICAL WASTE CHARGES - 200',
+    'DRESSING CHARGE(SMALL) - 100',
+    'DRESSING CHARGE(BIG) - 300',
+    'DAY CARE ADMISSION CHARGES - 500',
+    'EMERGENCY ROOM CHARGE - 2000',
+    'ADMISSION CHARGE - 250',
+    'MULTIPARA MONITOR CHARGE - 500',
+    'INFUSION PUMP CHARGE - 500',
+  ];  
 
   useEffect(() => {
     if (Object.keys(data).length > 0) {
